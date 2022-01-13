@@ -9,7 +9,7 @@ fun User.toUserDTO() = UserDTO(
    email = this.email
 )
 
-fun MutableList<User>.toListUserDTO() =
+fun MutableList<User>.toUserDTOList() =
    this.map { user ->
       user.toUserDTO()
    }.toMutableList()
