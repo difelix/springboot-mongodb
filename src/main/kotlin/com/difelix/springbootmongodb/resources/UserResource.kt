@@ -1,6 +1,7 @@
 package com.difelix.springbootmongodb.resources
 
 import com.difelix.springbootmongodb.domain.User
+import com.difelix.springbootmongodb.services.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -10,25 +11,15 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/v1/users")
-class UserResource {
+class UserResource(
+   private val userService: UserService
+) {
 
    @GetMapping
    @ResponseBody
    @ResponseStatus(HttpStatus.OK)
-   fun findAll() : List<User> {
-      val user1 = User(
-         id = "1",
-         name = "Diego Felix",
-         email = "diego@email.com"
-      )
-
-      val user2 = User(
-         id = "2",
-         name = "Ze das Couves",
-         email = "zedascouves@email.com"
-      )
-
-      return mutableListOf(user1, user2)
+   fun findAll() : MutableList<User> {
+      return userService.findAll()
    }
 
 }
