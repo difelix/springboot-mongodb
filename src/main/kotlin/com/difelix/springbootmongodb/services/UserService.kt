@@ -20,4 +20,9 @@ class UserService(
 
    fun save(user: User) = userRepository.save(user)
 
+   fun delete(id: String) {
+      findById(id)
+      userRepository.deleteById(id)
+   }
+
 }

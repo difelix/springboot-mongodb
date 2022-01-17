@@ -7,6 +7,7 @@ import com.difelix.springbootmongodb.resources.mappers.toUserDTO
 import com.difelix.springbootmongodb.resources.mappers.toUserDTOList
 import com.difelix.springbootmongodb.services.UserService
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -44,6 +45,12 @@ class UserResource(
    fun save(@RequestBody userDTO: UserDTO) : UserDTO {
       val userSaved = userService.save(userDTO.toUser())
       return userSaved.toUserDTO()
+   }
+
+   @DeleteMapping("/{id}")
+   @ResponseStatus(HttpStatus.NO_CONTENT)
+   fun delete(@PathVariable id: String) {
+      userService.delete(id)
    }
 
 }
