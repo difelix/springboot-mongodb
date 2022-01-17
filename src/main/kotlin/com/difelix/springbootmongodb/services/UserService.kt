@@ -25,4 +25,17 @@ class UserService(
       userRepository.deleteById(id)
    }
 
+   fun update(userToUpdate: User) : User {
+      val actualUser = findById(userToUpdate.id!!)
+      val newUser = updateUserData(actualUser, userToUpdate)
+      return userRepository.save(newUser)
+   }
+
+   private fun updateUserData(actualUser: User, updatedUser: User) : User {
+      return actualUser.apply {
+         this.name = updatedUser.name
+         this.email = updatedUser.email
+      }
+   }
+
 }
